@@ -1,0 +1,11 @@
+# ckan-extensions requirements
+
+{{#each extensions}}
+    # extension: {{this.name}}
+    {{if this.type == 'pip'}}
+        {{this.name}}=={{this.version}}
+    {{/if}}
+    {{if this.type == 'local'}}
+        -e {{this.path}}
+    {{/if}}
+{{/each}}

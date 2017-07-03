@@ -1,0 +1,32 @@
+{
+  "name": "ckan_builder",
+  "version": "0.1.0",
+  "description": "buildtool for ckan",
+  "bin": {
+    "ckanbuilder": "bin/ckanbuilder"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goldi42/ckan_builder.git"
+  },
+  "keywords": [
+    "ckan",
+    "build",
+    "buildtool"
+  ],
+  "author": "goldi42",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goldi42/ckan_builder/issues"
+  },
+  "homepage": "https://github.com/goldi42/ckan_builder#readme",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "handlebars": "^4.0.10",
+    "shelljs": "^0.7.8"
+  }
+}
