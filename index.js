@@ -12,15 +12,15 @@ program
     .option('-o, --output [path]', 'Path where the results wood save')
     .action((task, command) => {
         switch (task) {
-            case 'requirements':
-                var jsonfile = (command.json_file)? command.json_file : path.join(process.cwd(), 'config', 'extensions.json');
-                var outputPath = (command.output)? command.output : path.join(process.cwd(), 'extensions');
-                var requirementsFileBuilder = require('./lib/build/requirementsFile');
-                requirementsFileBuilder.build(jsonfile, outputPath);
-                break;
+        case 'requirements':
+            var jsonfile = (command.json_file)? command.json_file : path.join(process.cwd(), 'config', 'extensions.json');
+            var outputPath = (command.output)? command.output : path.join(process.cwd(), 'extensions');
+            var requirementsFileBuilder = require('./lib/build/requirementsFile');
+            requirementsFileBuilder.build(jsonfile, outputPath);
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     });
 
