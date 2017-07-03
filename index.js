@@ -13,8 +13,8 @@ program
     .action((task, command) => {
         switch (task) {
             case 'requirements':
-                var jsonfile = (command.jsonFile)? command.jsonFile : path.join(process.cwd, 'config', 'extensions.json');
-                var outputPath = (command.output)? command.output : path.join(process.cwd, 'extensions');
+                var jsonfile = (command.json_file)? command.json_file : path.join(process.cwd(), 'config', 'extensions.json');
+                var outputPath = (command.output)? command.output : path.join(process.cwd(), 'extensions');
                 var requirementsFileBuilder = require('../lib/build/requirementsFile');
                 requirementsFileBuilder.build(jsonfile, outputPath);
                 break;
@@ -22,6 +22,6 @@ program
             default:
                 break;
         }
-    })
+    });
 
 program.parse(process.argv);
