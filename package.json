@@ -27,7 +27,8 @@
   "dependencies": {
     "commander": "^2.11.0",
     "handlebars": "^4.0.10",
-    "shelljs": "^0.7.8"
+    "shelljs": "^0.7.8",
+    "tar": "^3.1.5"
   },
   "devDependencies": {
     "eslint": "^4.1.1"
