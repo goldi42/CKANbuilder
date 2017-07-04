@@ -44,4 +44,25 @@ program
         }
     });
 
+program
+    .command('download <task>')
+    .description('download ckan or all extensions')
+    .option('-j, --json_file [file]','JSON File with ckan extensions', path.join(process.cwd(), 'config', 'extensions.json'))
+    .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
+    .option('-c, --ckan_version [version]', 'ckan version which should be installed', '2.5.5')
+    .action( (task, command) => {
+        switch (task) {
+        case 'ckan':
+            var ckanDownloader = require('./lib/download/ckan');
+            ckanDownloader.download(command.ckan_version, command.install_dir);
+            break;
+        case 'extensions':
+            var extensionDownloader = require('./lib/download/extensions');
+            extensionDownloader.download(command.json_file,command.install_dir);
+            break;
+        default:
+            break;
+        }
+    });
+
 program.parse(process.argv);
