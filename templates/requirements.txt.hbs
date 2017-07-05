@@ -2,10 +2,10 @@
 
 {{#each extensions}}
     # extension: {{this.name}}
-    {{#ifcond this.type '==' 'PyPI'}}
+    {{#if (eq this.type 'PyPI')}}
         {{this.name}}=={{this.version}}
-    {{/ifcond}}
-    {{#ifcond this.type '==' 'local'}}
-        -e {{this.path}}
-    {{/ifcond}}
+    {{/if}}
+    {{#if (eq this.type 'local')}}
+        -e {{this.path}}{{this.name}}
+    {{/if}}
 {{/each}}
