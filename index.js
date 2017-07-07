@@ -11,16 +11,19 @@ program
     .description('build operations')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
     .option('-o, --output [path]', 'Path where the results should save')
+    .option('-e, --extension_path [path]', 'Path where the extension are saved')
     .action((task, command) => {
         var ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
         var ckanConfig = require(ckanconfigFile);
-
         switch (task) {
         case 'requirements':
             var requirementsFileBuilder = require('./lib/build/requirementsFile');
             requirementsFileBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.output));
             break;
-
+        case 'assets':
+            var assetsBuilder = require('./lib/build/assets');
+            assetsBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components));
+            break;
         default:
             break;
         }
