@@ -1,4 +1,5 @@
 const path = require('path');
+const pathUtil = require('./lib/utils/path');
 var program = require('commander');
 
 program
@@ -9,7 +10,7 @@ program
     .command('build <task>')
     .description('build operations')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
-    .option('-o, --output [path]', 'Path where the results wood save')
+    .option('-o, --output [path]', 'Path where the results should save')
     .action((task, command) => {
         var ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
         var ckanConfig = require(ckanconfigFile);
@@ -17,7 +18,7 @@ program
         switch (task) {
         case 'requirements':
             var requirementsFileBuilder = require('./lib/build/requirementsFile');
-            requirementsFileBuilder.build(ckanConfig.extensions, (command.output)? command.output : determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'extensions')));
+            requirementsFileBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.output));
             break;
 
         default:
@@ -36,12 +37,12 @@ program
         switch (task) {
         case 'extensions':
             var extensionInstaller = require('./lib/install/extensions');
-            extensionInstaller.install(ckanConfig.extensions, (command.install_dir)? command.install_dir : determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'extensions')));
+            extensionInstaller.install(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.install_dir));
             break;
         case 'ckan':
             var ckan_version = (command.ckan_version)? command.ckan_version : ckanConfig.ckan.version;
             var ckanInstaller = require('./lib/install/ckan');
-            ckanInstaller.install(ckan_version, (command.install_dir)? command.install_dir : determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'vendor')));
+            ckanInstaller.install(ckan_version, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.install_dir));
             break;
         default:
             break;
@@ -61,25 +62,15 @@ program
         switch (task) {
         case 'ckan':
             var ckanDownloader = require('./lib/download/ckan');
-            ckanDownloader.download(command.ckan_version, (command.install_dir)? command.install_dir : determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'vendor')));
+            ckanDownloader.download(command.ckan_version, (command.install_dir)? command.install_dir : pathUtil.determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'vendor')));
             break;
         case 'extensions':
             var extensionDownloader = require('./lib/download/extensions');
-            extensionDownloader.download(ckanConfig.extensions, (command.install_dir)? command.install_dir : determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'extensions')));
+            extensionDownloader.download(ckanConfig.extensions, (command.install_dir)? command.install_dir : pathUtil.determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'extensions')));
             break;
         default:
             break;
         }
     });
-
-function determineDefaultFolder(command, components, defaultPath) {
-    var commandPath = defaultPath;
-    components.forEach(function(component) {
-        if (component.name === command) {
-            commandPath = path.join(process.cwd(), component.path);
-        }
-    }, this);
-    return commandPath;
-}
 
 program.parse(process.argv);
