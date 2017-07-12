@@ -1,6 +1,6 @@
 const path = require('path');
 const pathUtil = require('./lib/utils/path');
-var program = require('commander');
+let program = require('commander');
 
 program
     .version('0.0.1')
@@ -13,8 +13,8 @@ program
     .option('-o, --output [path]', 'Path where the results should save')
     .option('-e, --extension_path [path]', 'Path where the extension are saved')
     .action((task, command) => {
-        var ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
-        var ckanConfig = require(ckanconfigFile);
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
+        let ckanConfig = require(ckanconfigFile);
         switch (task) {
         case 'requirements':
             var requirementsFileBuilder = require('./lib/build/requirementsFile');
@@ -35,8 +35,8 @@ program
     .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
     .option('-c, --ckan_version [version]', 'ckan version which should be installed')
     .action( (task, command) => {
-        var ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
-        var ckanConfig = require(ckanconfigFile);
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
+        let ckanConfig = require(ckanconfigFile);
         switch (task) {
         case 'extensions':
             var extensionInstaller = require('./lib/install/extensions');
@@ -59,8 +59,8 @@ program
     .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
     .option('-C, --ckan_version [version]', 'ckan version which should be installed', '2.5.5')
     .action( (task, command) => {
-        var ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
-        var ckanConfig = require(ckanconfigFile);
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
+        let ckanConfig = require(ckanconfigFile);
 
         switch (task) {
         case 'ckan':
