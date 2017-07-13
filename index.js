@@ -76,4 +76,16 @@ program
         }
     });
 
+program
+    .command('init <task>')
+    .description('initialize the ckan project')
+    .action( (task) => {
+        switch (task) {
+        case 'ckanconfig': {
+            let ckanConfigInitializer = require('./lib/init/ckanconfig');
+            ckanConfigInitializer.init();
+            break;}
+        }
+    });
+
 program.parse(process.argv);
