@@ -13,7 +13,7 @@ program
     .option('-o, --output [path]', 'Path where the results should save')
     .option('-e, --extension_path [path]', 'Path where the extension are saved')
     .action((task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
         switch (task) {
         case 'requirements':
@@ -35,7 +35,7 @@ program
     .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
     .option('-c, --ckan_version [version]', 'ckan version which should be installed')
     .action( (task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
         switch (task) {
         case 'extensions':
@@ -59,7 +59,7 @@ program
     .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
     .option('-C, --ckan_version [version]', 'ckan version which should be installed', '2.5.5')
     .action( (task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'config', 'ckanconfig.json');
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
 
         switch (task) {
