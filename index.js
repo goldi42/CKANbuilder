@@ -16,14 +16,16 @@ program
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
         switch (task) {
-        case 'requirements':
+        case 'requirements': {
             var requirementsFileBuilder = require('./lib/build/requirementsFile');
             requirementsFileBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.output));
             break;
-        case 'assets':
+        }
+        case 'assets': {
             var assetsBuilder = require('./lib/build/assets');
             assetsBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components));
             break;
+        }
         default:
             break;
         }
@@ -38,15 +40,17 @@ program
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
         switch (task) {
-        case 'extensions':
-            var extensionInstaller = require('./lib/install/extensions');
+        case 'extensions': {
+            let extensionInstaller = require('./lib/install/extensions');
             extensionInstaller.install(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.install_dir));
             break;
-        case 'ckan':
-            var ckan_version = (command.ckan_version)? command.ckan_version : ckanConfig.ckan.version;
-            var ckanInstaller = require('./lib/install/ckan');
+        }
+        case 'ckan': {
+            let ckan_version = (command.ckan_version)? command.ckan_version : ckanConfig.ckan.version;
+            let ckanInstaller = require('./lib/install/ckan');
             ckanInstaller.install(ckan_version, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.install_dir));
             break;
+        }
         default:
             break;
         }
@@ -63,14 +67,16 @@ program
         let ckanConfig = require(ckanconfigFile);
 
         switch (task) {
-        case 'ckan':
-            var ckanDownloader = require('./lib/download/ckan');
+        case 'ckan': {
+            let ckanDownloader = require('./lib/download/ckan');
             ckanDownloader.download(command.ckan_version, (command.install_dir)? command.install_dir : pathUtil.determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'vendor')));
             break;
-        case 'extensions':
-            var extensionDownloader = require('./lib/download/extensions');
+        }
+        case 'extensions': {
+            let extensionDownloader = require('./lib/download/extensions');
             extensionDownloader.download(ckanConfig.extensions, (command.install_dir)? command.install_dir : pathUtil.determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'extensions')));
             break;
+        }
         default:
             break;
         }
@@ -84,7 +90,10 @@ program
         case 'ckanconfig': {
             let ckanConfigInitializer = require('./lib/init/ckanconfig');
             ckanConfigInitializer.init();
-            break;}
+            break;
+        }
+        default:
+            break;
         }
     });
 
