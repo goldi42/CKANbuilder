@@ -2,7 +2,10 @@
     "ckan": {
         "version": "2.8"
     },
-
+    "components": [
+        {"name": "extensions", "path": "./extensions"},
+        {"name": "vendor", "path": "./vendor"}
+    ],
     "extensions": [
         {"name": "Local Extension", "version": "1.0.0", "type": "Local", "path": "./", "build_asset": true},
         {"name": "VCS Extension", "version": "master", "type": "VCS", "repository": "git+https://github.com/myacc/myrepo/"},
