@@ -34,7 +34,7 @@ program
     .command('install <task>')
     .description('install ckan or all extensions for ckan. Valid tasks are \'ckan\' and \'extensions\' ')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
-    .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
+    .option('-i, --install_dir [path]','directory for installation')
     .option('-c, --ckan_version [version]', 'ckan version which should be installed')
     .action( (task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
