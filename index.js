@@ -97,4 +97,23 @@ program
         }
     });
 
+program
+    .command('configure <task>')
+    .option('-i, --configini_file <file>','Ckan config ini')
+    .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
+    .action( (task, command) => {
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
+        let ckanConfig = require(ckanconfigFile);
+        switch (task) {
+        case 'plugins': {
+            let pluginConfigurationManager = require('./lib/configure/plugins');
+            pluginConfigurationManager.activateCkanPlugins(ckanConfig.config.plugins, command.configini_file);
+            break;
+        }
+        default:
+            break;
+        }
+
+    });
+
 program.parse(process.argv);

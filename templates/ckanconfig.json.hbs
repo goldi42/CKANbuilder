@@ -6,6 +6,14 @@
         {"name": "extensions", "path": "./extensions"},
         {"name": "vendor", "path": "./vendor"}
     ],
+    "config": {
+        "plugins": [
+            {"name": "stats", "active":true},
+            {"name": "text_view", "active":true},
+            {"name": "image_view", "active":true},
+            {"name": "recline_view", "active":true}
+        ]
+    },
     "extensions": [
         {"name": "Local Extension", "version": "1.0.0", "type": "Local", "path": "./", "build_asset": true},
         {"name": "VCS Extension", "version": "master", "type": "VCS", "repository": "git+https://github.com/myacc/myrepo/"},
