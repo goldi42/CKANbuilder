@@ -111,7 +111,7 @@ program
             pluginConfigurationManager.activateCkanPlugins(ckanConfig.config.plugins, command.configini_file);
             break;
         }
-        case 'admin': {
+        case 'sysadmin': {
             let userConfigurationManager = require('./lib/configure/user');
             let userData = userConfigurationManager.getPromptFields();
             inquirer.prompt(userData).then( answers => {
