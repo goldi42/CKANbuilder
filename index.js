@@ -1,5 +1,6 @@
 const path = require('path');
 const pathUtil = require('./lib/utils/path');
+const inquirer = require('inquirer');
 let program = require('commander');
 
 program
@@ -108,6 +109,22 @@ program
         case 'plugins': {
             let pluginConfigurationManager = require('./lib/configure/plugins');
             pluginConfigurationManager.activateCkanPlugins(ckanConfig.config.plugins, command.configini_file);
+            break;
+        }
+        case 'admin': {
+            let userConfigurationManager = require('./lib/configure/user');
+            let userData = userConfigurationManager.getPromptFields();
+            inquirer.prompt(userData).then( answers => {
+                userConfigurationManager.addSysadminUser(answers.username, answers.password, answers.email, command.configini_file);
+            });
+            break;
+        }
+        case 'user': {
+            let userConfigurationManager = require('./lib/configure/user');
+            let userData = userConfigurationManager.getPromptFields();
+            inquirer.prompt(userData).then( answers => {
+                userConfigurationManager.addUser(answers.username, answers.password, answers.email, command.configini_file);
+            });
             break;
         }
         default:
