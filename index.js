@@ -4,7 +4,7 @@ const inquirer = require('inquirer');
 let program = require('commander');
 
 program
-    .version('0.4.0')
+    .version('1.0.0')
     .description('ckan build tool for common tasks');
 
 program
