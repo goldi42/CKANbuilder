@@ -11,7 +11,6 @@ program
     .command('build <task>')
     .description('build operations')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
-    .option('-o, --output [path]', 'Path where the results should save')
     .option('-e, --extension_path [path]', 'Path where the extension are saved')
     .action((task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
