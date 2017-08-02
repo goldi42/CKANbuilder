@@ -16,15 +16,9 @@ program
     .action((task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
-        switch (task) {
-        case 'assets': {
-            var assetsBuilder = require('./lib/build/assets');
-            assetsBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components));
-            break;
-        }
-        default:
-            break;
-        }
+        let BuildCommand = require('./lib/command/build');
+        let buildCommand = new BuildCommand(task, command, ckanConfig);
+        buildCommand.exec();
     });
 program
     .command('install <task>')
