@@ -1,7 +1,11 @@
 const path = require('path');
 const pathUtil = require('./lib/utils/path');
 const inquirer = require('inquirer');
+
+const BuildCommand = require('./lib/command/build');
+const InstallCommand = require('./lib/command/install');
 let program = require('commander');
+
 
 program
     .version('1.0.0')
@@ -15,7 +19,6 @@ program
     .action((task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
-        let BuildCommand = require('./lib/command/build');
         let buildCommand = new BuildCommand(task, command, ckanConfig);
         buildCommand.exec();
     });
@@ -23,34 +26,21 @@ program
     .command('install <task>')
     .description('install ckan or all extensions for ckan. Valid tasks are \'ckan\' and \'extensions\' ')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
-    .option('-i, --install_dir [path]','directory for installation')
-    .option('-c, --ckan_version [version]', 'ckan version which should be installed')
+    .option('-d, --install_dir [path]','directory for installation')
+    .option('-i, --ckan_version [version]', 'ckan version which should be installed')
     .action( (task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
-        switch (task) {
-        case 'extensions': {
-            let extensionInstaller = require('./lib/install/extensions');
-            extensionInstaller.install(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.install_dir));
-            break;
-        }
-        case 'ckan': {
-            let ckan_version = (command.ckan_version)? command.ckan_version : ckanConfig.ckan.version;
-            let ckanInstaller = require('./lib/install/ckan');
-            ckanInstaller.install(ckan_version, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.install_dir));
-            break;
-        }
-        default:
-            break;
-        }
+        let installCommand = new InstallCommand(task, command, ckanConfig);
+        installCommand.exec();
     });
 
 program
     .command('download <task>')
     .description('download ckan or all extensions')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
-    .option('-i, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
-    .option('-C, --ckan_version [version]', 'ckan version which should be installed', '2.5.5')
+    .option('-d, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
+    .option('-i, --ckan_version [version]', 'ckan version which should be installed', '2.5.5')
     .action( (task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
