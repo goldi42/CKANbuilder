@@ -17,11 +17,6 @@ program
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
         switch (task) {
-        case 'requirements': {
-            var requirementsFileBuilder = require('./lib/build/requirementsFile');
-            requirementsFileBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.output));
-            break;
-        }
         case 'assets': {
             var assetsBuilder = require('./lib/build/assets');
             assetsBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components));
@@ -84,21 +79,6 @@ program
     });
 
 program
-    .command('init <task>')
-    .description('initialize the ckan project')
-    .action( (task) => {
-        switch (task) {
-        case 'ckanconfig': {
-            let ckanConfigInitializer = require('./lib/init/ckanconfig');
-            ckanConfigInitializer.init();
-            break;
-        }
-        default:
-            break;
-        }
-    });
-
-program
     .command('configure <task>')
     .option('-i, --configini_file <file>','Ckan config ini')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
@@ -133,4 +113,24 @@ program
 
     });
 
+program
+    .command('generate <task>')
+    .action( (task, command) => {
+        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
+        let ckanConfig = require(ckanconfigFile);
+        switch (task) {
+        case 'requirements': {
+            var requirementsFileBuilder = require('./lib/build/requirementsFile');
+            requirementsFileBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.output));
+            break;
+        }
+        case 'ckanconfig': {
+            let ckanConfigInitializer = require('./lib/init/ckanconfig');
+            ckanConfigInitializer.init();
+            break;
+        }
+        default:
+            break;
+        }
+    });
 program.parse(process.argv);
