@@ -1,10 +1,9 @@
 const path = require('path');
 const pathUtil = require('./lib/utils/path');
 const inquirer = require('inquirer');
-
 const BuildCommand = require('./lib/command/build');
 const InstallCommand = require('./lib/command/install');
-const DownloadCommand = require('./lib/command/donwload');
+const DownloadCommand = require('./lib/command/download');
 let program = require('commander');
 
 
@@ -82,6 +81,7 @@ program
         default:
             break;
         }
+
 
     });
 
