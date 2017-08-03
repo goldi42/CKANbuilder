@@ -1,9 +1,10 @@
 const path = require('path');
 const pathUtil = require('./lib/utils/path');
-const inquirer = require('inquirer');
+
 const BuildCommand = require('./lib/command/build');
 const InstallCommand = require('./lib/command/install');
 const DownloadCommand = require('./lib/command/download');
+const ConfigureCommand = require('./lib/command/configure');
 let program = require('commander');
 
 
@@ -56,32 +57,8 @@ program
     .action( (task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
-        switch (task) {
-        case 'plugins': {
-            let pluginConfigurationManager = require('./lib/configure/plugins');
-            pluginConfigurationManager.activateCkanPlugins(ckanConfig.config.plugins, command.configini_file);
-            break;
-        }
-        case 'sysadmin': {
-            let userConfigurationManager = require('./lib/configure/user');
-            let userData = userConfigurationManager.getPromptFields();
-            inquirer.prompt(userData).then( answers => {
-                userConfigurationManager.addSysadminUser(answers.username, answers.password, answers.email, command.configini_file);
-            });
-            break;
-        }
-        case 'user': {
-            let userConfigurationManager = require('./lib/configure/user');
-            let userData = userConfigurationManager.getPromptFields();
-            inquirer.prompt(userData).then( answers => {
-                userConfigurationManager.addUser(answers.username, answers.password, answers.email, command.configini_file);
-            });
-            break;
-        }
-        default:
-            break;
-        }
-
+        let configureCommand = new ConfigureCommand(task,command,ckanConfig);
+        configureCommand.exec();
 
     });
 
