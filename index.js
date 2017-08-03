@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 
 const BuildCommand = require('./lib/command/build');
 const InstallCommand = require('./lib/command/install');
+const DownloadCommand = require('./lib/command/donwload');
 let program = require('commander');
 
 
@@ -44,21 +45,9 @@ program
     .action( (task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
+        let downloadCommand = new DownloadCommand(task, command, ckanConfig);
+        downloadCommand.exec();
 
-        switch (task) {
-        case 'ckan': {
-            let ckanDownloader = require('./lib/download/ckan');
-            ckanDownloader.download(command.ckan_version, (command.install_dir)? command.install_dir : pathUtil.determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'vendor')));
-            break;
-        }
-        case 'extensions': {
-            let extensionDownloader = require('./lib/download/extensions');
-            extensionDownloader.download(ckanConfig.extensions, (command.install_dir)? command.install_dir : pathUtil.determineDefaultFolder(task, ckanConfig.components, path.join(process.cwd(), 'extensions')));
-            break;
-        }
-        default:
-            break;
-        }
     });
 
 program
