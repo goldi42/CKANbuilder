@@ -1,10 +1,11 @@
 const path = require('path');
-const pathUtil = require('./lib/utils/path');
 
 const BuildCommand = require('./lib/command/build');
 const InstallCommand = require('./lib/command/install');
 const DownloadCommand = require('./lib/command/download');
 const ConfigureCommand = require('./lib/command/configure');
+const GenerateCommand = require('./lib/command/generate');
+
 let program = require('commander');
 
 
@@ -67,19 +68,7 @@ program
     .action( (task, command) => {
         let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
         let ckanConfig = require(ckanconfigFile);
-        switch (task) {
-        case 'requirements': {
-            var requirementsFileBuilder = require('./lib/build/requirementsFile');
-            requirementsFileBuilder.build(ckanConfig.extensions, pathUtil.getComponentDirectory('extensions', ckanConfig.components, command.output));
-            break;
-        }
-        case 'ckanconfig': {
-            let ckanConfigInitializer = require('./lib/init/ckanconfig');
-            ckanConfigInitializer.init();
-            break;
-        }
-        default:
-            break;
-        }
+        let generateCommand = new GenerateCommand(task, command, ckanConfig);
+        generateCommand.exec();
     });
 program.parse(process.argv);
