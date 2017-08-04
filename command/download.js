@@ -1,8 +1,11 @@
 const AbstractCommand = require('./abstractCommand');
+const CkanDownloader = require('../lib/download/ckan');
+const ExtensionDownloader = require('../lib/download/extensions');
 
-class InstallCommand extends AbstractCommand{
+class DownloadCommand extends AbstractCommand {
+
     /**
-     * constructor for InstallCommand
+     * constructor for DownloadCommand
      * @param {string} task
      * @param {array} commandOptions
      * @param {array} ckanJson
@@ -13,18 +16,16 @@ class InstallCommand extends AbstractCommand{
     }
 
     /**
-     * execute the install command
+     * execute the download tasks
      */
-    exec() {
+    exec () {
         switch (this.task) {
-        case 'extensions': {
-            let ExtensionInstaller = require('./lib/install/extensions');
-            ExtensionInstaller.install(this.extensions, this.extDir);
+        case 'ckan': {
+            CkanDownloader.download(this.ckan_version, this.vendorDir);
             break;
         }
-        case 'ckan': {
-            let CkanInstaller = require('./lib/install/ckan');
-            CkanInstaller.install(this.ckan_version, this.extDir);
+        case 'extensions': {
+            ExtensionDownloader.download(this.extensions, this.extDir);
             break;
         }
         default:
@@ -33,4 +34,4 @@ class InstallCommand extends AbstractCommand{
     }
 }
 
-module.exports = InstallCommand;
+module.exports = DownloadCommand;

@@ -14,7 +14,7 @@ class AbstractCommand {
         if (ckanJson.extensions) {
             this.extensions = ckanJson.extensions;
         }
-        this.pathUtil = require('./lib/utils/path');
+        this.pathUtil = require('../lib/utils/path');
         this.extDir = this.pathUtil.getComponentDirectory('extensions', this.ckanJson.components, commandOptions.install_dir);
         this.vendorDir = this.pathUtil.getComponentDirectory('vendor', this.ckanJson.components, commandOptions.install_dir);
     }

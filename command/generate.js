@@ -1,5 +1,6 @@
 const AbstractCommand = require('./abstractCommand');
-const CkanConfigInitializer = require('./lib/generate/ckanconfig');
+const CkanConfigInitializer = require('../lib/generate/ckanconfig');
+const RequirementsFileBuilder = require('../lib/generate/requirementsFile');
 
 class GenerateCommand extends AbstractCommand {
 
@@ -9,7 +10,6 @@ class GenerateCommand extends AbstractCommand {
     exec () {
         switch (this.task) {
         case 'requirements': {
-            const RequirementsFileBuilder = require('./lib/generate/requirementsFile');
             RequirementsFileBuilder.build(this.extensions, this.extDir);
             break;
         }

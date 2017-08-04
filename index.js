@@ -1,10 +1,10 @@
 const path = require('path');
 
-const BuildCommand = require('./lib/command/build');
-const InstallCommand = require('./lib/command/install');
-const DownloadCommand = require('./lib/command/download');
-const ConfigureCommand = require('./lib/command/configure');
-const GenerateCommand = require('./lib/command/generate');
+const BuildCommand = require('./command/build');
+const InstallCommand = require('./command/install');
+const DownloadCommand = require('./command/download');
+const ConfigureCommand = require('./command/configure');
+const GenerateCommand = require('./command/generate');
 
 let program = require('commander');
 

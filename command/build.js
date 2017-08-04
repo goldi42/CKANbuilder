@@ -1,5 +1,5 @@
 const AbstractCommand = require('./abstractCommand');
-const AssetsBuilder = require('./lib/build/assets');
+const AssetsBuilder = require('../lib/build/assets');
 
 class BuildCommand extends AbstractCommand{
 
