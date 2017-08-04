@@ -1,4 +1,6 @@
 const AbstractCommand = require('./abstractCommand');
+const UserConfigurationManager = require('./lib/configure/user');
+const PluginConfigurationManager = require('./lib/configure/plugins');
 const inquirer = require('inquirer');
 
 class ConfigureCommand extends AbstractCommand {
@@ -14,21 +16,20 @@ class ConfigureCommand extends AbstractCommand {
     exec () {
         switch (this.task) {
         case 'plugins': {
-            let pluginConfigurationManager = require('./lib/configure/plugins');
+            let pluginConfigurationManager = new PluginConfigurationManager();
             pluginConfigurationManager.activateCkanPlugins(this.ckanJson.config.plugins, this.ckanini);
             break;
         }
         case 'sysadmin': {
-            let userConfigurationManager = require('./lib/configure/user');
+
             inquirer.prompt(this.getInputConfiguration()).then( answers => {
-                userConfigurationManager.addSysadminUser(answers.username, answers.password, answers.email, this.ckanini);
+                UserConfigurationManager.addSysadminUser(answers.username, answers.password, answers.email, this.ckanini);
             });
             break;
         }
         case 'user': {
-            let userConfigurationManager = require('./lib/configure/user');
             inquirer.prompt(this.getInputConfiguration()).then( answers => {
-                userConfigurationManager.addUser(answers.username, answers.password, answers.email, this.ckanini);
+                UserConfigurationManager.addUser(answers.username, answers.password, answers.email, this.ckanini);
             });
             break;
         }
