@@ -1,6 +1,6 @@
 const AbstractCommand = require('./abstractCommand');
-const UserConfigurationManager = require('./lib/configure/user');
-const PluginConfigurationManager = require('./lib/configure/plugins');
+const UserConfigurationManager = require('../lib/configure/user');
+const PluginConfigurationManager = require('../lib/configure/plugins');
 const inquirer = require('inquirer');
 
 class ConfigureCommand extends AbstractCommand {
