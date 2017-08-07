@@ -19,9 +19,7 @@ program
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
     .option('-e, --extension_path [path]', 'Path where the extension are saved')
     .action((task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
-        let ckanConfig = require(ckanconfigFile);
-        let buildCommand = new BuildCommand(task, command, ckanConfig);
+        let buildCommand = new BuildCommand(task, command);
         buildCommand.exec();
     });
 program
@@ -31,9 +29,7 @@ program
     .option('-d, --install_dir [path]','directory for installation')
     .option('-i, --ckan_version [version]', 'ckan version which should be installed')
     .action( (task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
-        let ckanConfig = require(ckanconfigFile);
-        let installCommand = new InstallCommand(task, command, ckanConfig);
+        let installCommand = new InstallCommand(task, command);
         installCommand.exec();
     });
 
@@ -44,9 +40,7 @@ program
     .option('-d, --install_dir [path]','directory for installation', path.join(process.cwd(), 'extension'))
     .option('-i, --ckan_version [version]', 'ckan version which should be installed', '2.5.5')
     .action( (task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
-        let ckanConfig = require(ckanconfigFile);
-        let downloadCommand = new DownloadCommand(task, command, ckanConfig);
+        let downloadCommand = new DownloadCommand(task, command);
         downloadCommand.exec();
 
     });
@@ -56,9 +50,7 @@ program
     .option('-i, --configini_file <file>','Ckan config ini')
     .option('-c, --ckanconfig_file [file]','JSON File with ckan config')
     .action( (task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
-        let ckanConfig = require(ckanconfigFile);
-        let configureCommand = new ConfigureCommand(task,command,ckanConfig);
+        let configureCommand = new ConfigureCommand(task,command);
         configureCommand.exec();
 
     });
@@ -66,9 +58,7 @@ program
 program
     .command('generate <task>')
     .action( (task, command) => {
-        let ckanconfigFile = (command.ckanconfig_file)? command.ckanconfig_file : path.join(process.cwd(), 'ckanconfig.json');
-        let ckanConfig = require(ckanconfigFile);
-        let generateCommand = new GenerateCommand(task, command, ckanConfig);
+        let generateCommand = new GenerateCommand(task, command);
         generateCommand.exec();
     });
 program.parse(process.argv);
