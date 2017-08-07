@@ -9,8 +9,8 @@ class InstallCommand extends AbstractCommand{
      * @param {array} commandOptions
      * @param {array} ckanJson
      */
-    constructor (task, commandOptions, ckanJson) {
-        super(task, commandOptions, ckanJson);
+    constructor (task, commandOptions) {
+        super(task, commandOptions);
         this.ckan_version = (this.commandOptions.ckan_version)? this.commandOptions.ckan_version : this.ckanJson.ckan.version;
     }
 

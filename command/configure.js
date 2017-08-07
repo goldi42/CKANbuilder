@@ -5,8 +5,8 @@ const inquirer = require('inquirer');
 
 class ConfigureCommand extends AbstractCommand {
 
-    constructor (task, commandOptions, ckanJson) {
-        super(task, commandOptions, ckanJson);
+    constructor (task, commandOptions) {
+        super(task, commandOptions);
         this.ckanini = commandOptions.configini_file;
     }
 
