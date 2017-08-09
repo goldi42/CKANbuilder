@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/goldi42/ckan_builder#readme",
   "dependencies": {
+    "chalk": "^2.1.0",
     "commander": "^2.11.0",
     "fs-extra": "^3.0.1",
     "handlebars": "^4.0.10",
