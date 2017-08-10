@@ -21,7 +21,7 @@ program
     .description('build operations')
     .option('-e, --extension_path [path]', 'Path where the extension are saved')
     .action((task, command) => {
-        updateEnvironment(this.parent);
+        updateEnvironment(command.parent);
         let buildCommand = new BuildCommand(task, command);
         buildCommand.exec();
     });
