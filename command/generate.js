@@ -1,5 +1,5 @@
 const AbstractCommand = require('./abstractCommand');
-const CkanConfigInitializer = require('../lib/generate/ckanconfig');
+const CkanJsonGenerator = require('../lib/generate/ckanjson');
 const RequirementsFileBuilder = require('../lib/generate/requirementsFile');
 
 class GenerateCommand extends AbstractCommand {
@@ -14,7 +14,7 @@ class GenerateCommand extends AbstractCommand {
             break;
         }
         case 'ckanconfig': {
-            let ckanConfigInitializer = new CkanConfigInitializer();
+            let ckanConfigInitializer = new CkanJsonGenerator();
             ckanConfigInitializer.init();
             break;
         }
