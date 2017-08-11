@@ -14,7 +14,8 @@ program
     .version('1.0.0')
     .description('ckan build tool for common tasks')
     .option('-l, --file_log','activate the filelog', false)
-    .option('-c, --ckanconfig_path [path]','Path to Ckan.json File with ckan config');
+    .option('-c, --ckanconfig_path [path]','Path to Ckan.json File with ckan config')
+    .option('-v, --verbose', 'set the console output to verbose');
 
 program
     .command('build <task>')
@@ -72,5 +73,9 @@ function updateEnvironment(program) {
 
     if (program.file_log) {
         LogService.getInstance().initializeFileLog(CkanJsonParser.getInstance().ckanJson.filelog, pathUtil.getComponentDirectory('logs', CkanJsonParser.getInstance().components));
+    }
+
+    if (program.verbose) {
+        LogService.getInstance().setVerboseConsoleLog();
     }
 }
