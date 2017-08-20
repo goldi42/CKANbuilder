@@ -12,7 +12,7 @@ let program = require('commander');
 
 program
     .version('1.0.0')
-    .description('ckan build tool for common tasks')
+    .description('CKAN build tool for common tasks')
     .option('-l, --file_log','activate the filelog', false)
     .option('-c, --ckanconfig_path [path]','Path to Ckan.json File with ckan config')
     .option('-v, --verbose', 'set the console output to verbose');
