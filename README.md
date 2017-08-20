@@ -1,10 +1,83 @@
-# ckan_builder
+# CKANbuilder
 
 A small build tool to install and configure your CKAN project
 
 ## ckan.json
 
-The ckan.json file is the important file for the ckan_builder. Inside the file you can descide witch CKAN version you want to use and what extensions you want to install and what plugins you want to activate.
+The ckan.json file is the important file for the CKANbuilder. Inside the file you can descide witch CKAN version you want to use and what extensions you want to install and what plugins you want to activate.
+
+* Example:
+
+```
+{
+    "ckan": {
+        "version": "2.7.0"
+    },
+    "components": [
+        {"name": "extensions", "path": "./extensions"},
+        {"name": "vendor", "path": "./vendor"},
+        {"name": "logs", "path": "./logs/"}
+    ],
+    "config": {
+        "plugins": [
+            {"name": "stats", "active":true},
+            {"name": "text_view", "active":true},
+            {"name": "image_view", "active":true},
+            {"name": "recline_view", "active":true}
+        ]
+    },
+    "extensions": [
+        {"name": "Local Extension", "version": "1.0.0", "type": "Local", "path": "./", "build_asset": true},
+        {"name": "VCS Extension", "version": "master", "type": "VCS", "repository": "git+https://github.com/myacc/myrepo/"},
+        {"name": "PyPI Extension", "version": "1.0.0", "type": "PyPI"}
+    ],
+    "filelog": {
+        "filename": "ckanbuilder.log"
+    }
+}
+
+```
+
+* Description:
+
+```
+ "ckan": {
+        "version": "2.7.0"
+    }
+```
+
+The CKAN Version which should be installed. You can install each version which is available via github.
+
+
+```
+"components": [
+        {"name": "extensions", "path": "./extensions"},
+        {"name": "vendor", "path": "./vendor"},
+        {"name": "logs", "path": "./logs/"}
+    ]
+```
+
+The directories where CKAN, extensions or other commponents should be installed and where the logs should be written.
+
+
+```
+ "extensions": [
+        {"name": "Local Extension", "version": "1.0.0", "type": "Local", "path": "./", "build_asset": true},
+        {"name": "VCS Extension", "version": "master", "type": "VCS", "repository": "git+https://github.com/myacc/myrepo/"},
+        {"name": "PyPI Extension", "version": "1.0.0", "type": "PyPI"}
+    ],
+```
+
+The list of extensions which shloud be installed. You can install local extensions. Extensions from an VCS like git or via PyPi. If you install an extension via git, you can install every tag or branch by settting the name inside the version value.
+You can configure if the assetes of the extension shloud be build via CKANbuilder.
+
+```
+"filelog": {
+        "filename": "ckanbuilder.log"
+    }
+```
+
+Defines the filename of the CKANbuilder log
 
 ## Available Commands
 
