@@ -27,7 +27,7 @@ The ckan.json file is the important file for the CKANbuilder. Inside the file yo
         ]
     },
     "extensions": [
-        {"name": "Local Extension", "version": "1.0.0", "type": "Local", "path": "./", "build_asset": true},
+        {"name": "Local Extension", "version": "1.0.0", "type": "Local", "path": "./", "build_asset": true, "dependency_file": "requirements.txt"},
         {"name": "VCS Extension", "version": "master", "type": "VCS", "repository": "git+https://github.com/myacc/myrepo/"},
         {"name": "PyPI Extension", "version": "1.0.0", "type": "PyPI"}
     ],
@@ -70,6 +70,7 @@ The directories where CKAN, extensions or other commponents should be installed 
 
 The list of extensions which shloud be installed. You can install local extensions. Extensions from an VCS like git or via PyPi. If you install an extension via git, you can install every tag or branch by settting the name inside the version value.
 You can configure if the assetes of the extension shloud be build via CKANbuilder.
+You also can define which is the korrekt dependency file for the extension.
 
 ```
 "filelog": {
