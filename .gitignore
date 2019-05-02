@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# ignore visual studio file
+/.vs/CKANbuilder/v16/.suo
