@@ -17,7 +17,9 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include=".eslintrc.json" />
+    <Content Include=".gitignore" />
     <Content Include="bin\ckanbuilder" />
+    <Content Include="LICENSE" />
     <Content Include="package-lock.json" />
     <Content Include="package.json" />
     <Content Include="README.md" />
