@@ -59,3 +59,5 @@ typings/
 
 # ignore visual studio file
 /.vs/CKANbuilder/v16/.suo
+/obj/Debug
+/bin/Microsoft.NodejsTools.WebRole.dll
