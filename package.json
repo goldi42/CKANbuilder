@@ -1,6 +1,6 @@
 {
   "name": "ckanbuilder",
-  "version": "1.3.2",
+  "version": "1.4.1",
   "description": " CKANbuilder is a buildtool for ckan",
   "bin": {
     "ckanbuilder": "bin/ckanbuilder"
