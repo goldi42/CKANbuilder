@@ -70,7 +70,18 @@ The directories where CKAN, extensions or other commponents should be installed 
 
 The list of extensions which shloud be installed. You can install local extensions. Extensions from an VCS like git or via PyPi. If you install an extension via git, you can install every tag or branch by settting the name inside the version value.
 You can configure if the assetes of the extension shloud be build via CKANbuilder.
-You also can define which is the korrekt dependency file for the extension.
+You also can define which is the correct dependency file for the extension.
+
+If you want to ignore a requirement file for an extension you can set the flag `ignore_requirement_file` in the 
+configuration: 
+
+```
+ "extensions": [
+        {"name": "PyPI Extension", "version": "1.0.0", "type": "PyPI", "ignore_requirement_file": true}
+    ],
+```
+
+Defines the filename of the CKANbuilder log:
 
 ```
 "filelog": {
@@ -78,7 +89,6 @@ You also can define which is the korrekt dependency file for the extension.
     }
 ```
 
-Defines the filename of the CKANbuilder log
 
 ## Available Commands
 
