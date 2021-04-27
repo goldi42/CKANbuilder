@@ -1,6 +1,6 @@
 {
   "name": "ckanbuilder",
-  "version": "1.4.1",
+  "version": "2.0.0",
   "description": " CKANbuilder is a buildtool for ckan",
   "bin": {
     "ckanbuilder": "bin/ckanbuilder"
@@ -19,6 +19,10 @@
     "buildtool"
   ],
   "author": "goldi42",
+  "contributors": [{
+    "name": "xellos866",
+     "url": "https://github.com/xellos866"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/goldi42/ckan_builder/issues"
