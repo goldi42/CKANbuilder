@@ -1,6 +1,10 @@
 # CKANbuilder
 
-A small build tool to install and configure your CKAN project
+A small build tool to install and configure your CKAN project.
+
+## requirements
+
+* Ckan `>= 2.9`
 
 ## ckan.json
 
@@ -11,7 +15,7 @@ The ckan.json file is the important file for the CKANbuilder. Inside the file yo
 ```
 {
     "ckan": {
-        "version": "2.7.0"
+        "version": "2.9.0"
     },
     "components": [
         {"name": "extensions", "path": "./extensions"},
@@ -42,7 +46,7 @@ The ckan.json file is the important file for the CKANbuilder. Inside the file yo
 
 ```
  "ckan": {
-        "version": "2.7.0"
+        "version": "2.9.0"
     }
 ```
 
