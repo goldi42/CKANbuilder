@@ -96,7 +96,7 @@ Defines the filename of the CKANbuilder log:
 
 ## Available Commands
 
-### global obtions
+### global options
 `-c, --ckanconfig_path [path]`  Path to Ckan.json File with ckan config
 
 `-v, --verbose` set the console output to verbose
@@ -128,6 +128,7 @@ With the install command you can install CKAN or extensions, which are defined i
 * Options:
     * `-d, --install_dir [path]` directory to installation CKAN or Extensions
     * `-i, --ckan_version [version]`  define the CKAN version which should be installed
+    * `-n, --no_use_pep517`  do not use PEP517 at install with pip
 * Examples:
     * Install CKAN:
     * Install Extensions:

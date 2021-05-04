@@ -11,7 +11,7 @@ const GenerateCommand = require('./command/generate');
 let program = require('commander');
 
 program
-    .version('2.0.0')
+    .version('2.1.0')
     .description('CKAN build tool for common tasks')
     .option('-l, --file_log','activate the filelog', false)
     .option('-c, --ckanconfig_path [path]','Path to Ckan.json File with ckan config')
@@ -31,6 +31,7 @@ program
     .description('install ckan or all extensions for ckan. Valid tasks are \'ckan\' and \'extensions\' ')
     .option('-d, --install_dir [path]','directory for installation')
     .option('-i, --ckan_version [version]', 'ckan version which should be installed')
+    .option('-n, --no_use_pep517', 'do not use PEP517 at install with pip')
     .action( (task, command) => {
         updateEnvironment(command.parent);
         let installCommand = new InstallCommand(task, command);
