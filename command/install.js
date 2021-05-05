@@ -12,6 +12,7 @@ class InstallCommand extends AbstractCommand{
     constructor (task, commandOptions) {
         super(task, commandOptions);
         this.ckan_version = (this.commandOptions.ckan_version)? this.commandOptions.ckan_version : this.ckanJson.ckan.version;
+        this.pip_pep_517 = (this.commandOptions.no_use_pep517)? '--no-use-pep-517' : '';
     }
 
     /**
@@ -20,11 +21,11 @@ class InstallCommand extends AbstractCommand{
     exec() {
         switch (this.task) {
         case 'extensions': {
-            ExtensionInstaller.install(this.extensions, this.extDir);
+            ExtensionInstaller.install(this.extensions, this.extDir, this.pip_pep_517);
             break;
         }
         case 'ckan': {
-            CkanInstaller.install(this.ckan_version, this.extDir);
+            CkanInstaller.install(this.ckan_version, this.extDir, this.pip_pep_517);
             break;
         }
         default:
