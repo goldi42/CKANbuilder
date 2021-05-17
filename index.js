@@ -11,7 +11,7 @@ const GenerateCommand = require('./command/generate');
 let program = require('commander');
 
 program
-    .version('2.1.0')
+    .version('2.1.1')
     .description('CKAN build tool for common tasks')
     .option('-l, --file_log','activate the filelog', false)
     .option('-c, --ckanconfig_path [path]','Path to Ckan.json File with ckan config')
