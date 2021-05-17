@@ -12,7 +12,7 @@ class InstallCommand extends AbstractCommand{
     constructor (task, commandOptions) {
         super(task, commandOptions);
         this.ckan_version = (this.commandOptions.ckan_version)? this.commandOptions.ckan_version : this.ckanJson.ckan.version;
-        this.pip_pep_517 = (this.commandOptions.no_use_pep517)? '--no-use-pep-517' : '';
+        this.pip_pep_517 = (this.commandOptions.no_use_pep517)? '--no-use-pep517' : '';
     }
 
     /**
