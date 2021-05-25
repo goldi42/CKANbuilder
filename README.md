@@ -2,6 +2,9 @@
 
 A small build tool to install and configure your CKAN project.
 
+
+⚠️ _Important:_ Projekt moved to https://github.com/dkd/CKANbuilder
+
 ## requirements
 
 * Ckan `>= 2.9`
